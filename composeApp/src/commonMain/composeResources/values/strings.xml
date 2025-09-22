@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<resources>
+    <string name="tab_all">All</string>
+    <string name="tab_local">Local</string>
+    <string name="tab_remote">Remote</string>
+    <string name="label_location">Location</string>
+    <string name="label_duration">Duration</string>
+    <string name="label_source">Source</string>
+    <string name="add_new_record">Add new record</string>
+    <string name="title_records_list">Sport records</string>
+    <string name="title_create_new_record">New sport record</string>
+
+    <string name="label_add_location">Location</string>
+    <string name="label_add_name">Name</string>
+    <string name="label_add_duration">Duration</string>
+
+    <string name="save_option">Save locally</string>
+    <string name="save_remote">Save remote</string>
+    <string name="save_record">Save</string>
+
+    <string name="label_hours">Hours</string>
+    <string name="label_minutes">Minutes</string>
+    <string name="label_seconds">Seconds</string>
+</resources>
