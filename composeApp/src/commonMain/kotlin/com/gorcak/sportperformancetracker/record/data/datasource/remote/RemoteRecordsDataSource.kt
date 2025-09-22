@@ -6,5 +6,7 @@ interface RemoteRecordsDataSource {
 
     suspend fun saveRecord(record: RecordDto)
 
-    fun getRemoteRecordsFlow() : Flow<List<RecordDto>>
+    fun getRecords() : Flow<List<RecordDto>>
+
+    suspend fun delete(id: String)
 }

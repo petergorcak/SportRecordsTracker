@@ -142,6 +142,9 @@ fun RecordsListScreen(
                             2 -> state.remoteRecords
                             else -> emptyList()
                         },
+                        onDeleteClicked = {
+                            onAction(RecordsListAction.DeleteRecord(it))
+                        }
                     )
                 }
             }

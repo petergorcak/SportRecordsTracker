@@ -20,8 +20,16 @@ class DefaultRecordsRepository(
         if (useRemote) {
             remoteDataSource.saveRecord(data.toRecordDto())
         } else {
-            sportsRecordsDao.upsert(data.toRecordEntity())
+            sportsRecordsDao.saveRecord(data.toRecordEntity())
         }
+    }
+
+    override suspend fun deleteRecord(id: String, isRemote: Boolean) {
+         if(isRemote){
+             remoteDataSource.delete(id)
+         } else {
+             sportsRecordsDao.delete(id)
+         }
     }
 
     override fun fetchLocalRecords(): Flow<List<Record>> {
@@ -30,7 +38,7 @@ class DefaultRecordsRepository(
     }
 
     override fun remoteRecordsFlow(): Flow<List<Record>> {
-        return remoteDataSource.getRemoteRecordsFlow()
+        return remoteDataSource.getRecords()
             .map { recordsDto -> recordsDto.map { it.toRecord() } }
     }
 

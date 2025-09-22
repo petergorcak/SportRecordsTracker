@@ -42,6 +42,15 @@ class RecordsListViewModel(
                     }
                 }
             }
+            is RecordsListAction.DeleteRecord -> {
+                val isRemote = when (action.record.sourceColorType) {
+                    SourceColorType.LOCAL ->  false
+                    SourceColorType.REMOTE -> true
+                }
+                viewModelScope.launch {
+                    recordsRepository.deleteRecord(action.record.id, isRemote)
+                }
+            }
 
             RecordsListAction.AddNewRecord -> Unit
         }

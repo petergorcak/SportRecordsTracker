@@ -19,7 +19,7 @@ class FirebaseRecordsDataSource : RemoteRecordsDataSource {
             .setValue(record)
     }
 
-    override fun getRemoteRecordsFlow(): Flow<List<RecordDto>> {
+    override fun getRecords(): Flow<List<RecordDto>> {
         val result = db.reference("sport_records").valueEvents
             .map { dataSnapshot ->
                 dataSnapshot.children.mapNotNull {
@@ -33,6 +33,12 @@ class FirebaseRecordsDataSource : RemoteRecordsDataSource {
                 }
             }
         return result
+    }
+
+    override suspend fun delete(id: String) {
+        db
+            .reference("sport_records/${id}")
+            .removeValue()
     }
 
 

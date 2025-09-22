@@ -8,19 +8,19 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.outlined.CloudDone
 import androidx.compose.material.icons.outlined.LocationOn
 import androidx.compose.material.icons.outlined.SdStorage
 import androidx.compose.material.icons.outlined.Timer
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -34,12 +34,12 @@ import sportperformancetracker.composeapp.generated.resources.label_location
 @Composable
 fun RecordItem(
     record: UiRecord,
+    onDeleteClicked: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     ElevatedCard(
         modifier = modifier
-            .fillMaxWidth(),
-        colors = CardDefaults.cardColors()
+            .fillMaxWidth()
     ) {
         Column(
             modifier = Modifier.fillMaxWidth()
@@ -51,6 +51,15 @@ fun RecordItem(
                 modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically
             ) {
+                Icon(
+                    imageVector = when (record.sourceColorType) {
+                        SourceColorType.LOCAL -> Icons.Outlined.SdStorage
+                        SourceColorType.REMOTE -> Icons.Outlined.CloudDone
+                    },
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.onSecondary,
+                    modifier = Modifier.padding(16.dp)
+                )
                 Text(
                     text = record.activityTitle,
                     modifier = Modifier
@@ -61,20 +70,22 @@ fun RecordItem(
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
                 )
-                Icon(
-                    imageVector = when (record.sourceColorType) {
-                        SourceColorType.LOCAL -> Icons.Outlined.SdStorage
-                        SourceColorType.REMOTE -> Icons.Outlined.CloudDone
+                IconButton(
+                    onClick = {
+                        onDeleteClicked()
                     },
-                    contentDescription = null,
-                    tint = Color.White,
-                    modifier = Modifier.padding(16.dp)
-                )
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Delete,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.onSecondary,
+                    )
+                }
             }
 
             Column(
                 modifier = Modifier.fillMaxWidth()
-                    .background(MaterialTheme.colorScheme.background)
+                    .background(MaterialTheme.colorScheme.background.copy(alpha = 0.8f))
                     .padding(16.dp)
             ) {
                 TitledText(

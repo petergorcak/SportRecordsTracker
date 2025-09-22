@@ -14,6 +14,7 @@ import com.gorcak.sportperformancetracker.record.presentation.model.UiRecord
 @Composable
 fun RecordsList(
     records: List<UiRecord>,
+    onDeleteClicked: (UiRecord) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     LazyColumn(
@@ -28,7 +29,10 @@ fun RecordsList(
             key = { it.id }
         ) { record ->
             RecordItem(
-                record = record
+                record = record,
+                onDeleteClicked = {
+                    onDeleteClicked(record)
+                }
             )
         }
 

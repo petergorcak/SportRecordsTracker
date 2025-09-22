@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.Flow
 interface SportRecordsDao {
 
     @Upsert
-    suspend fun upsert(record: RecordEntity)
+    suspend fun saveRecord(record: RecordEntity)
 
     @Query("SELECT * FROM RecordEntity")
     fun getRecords(): Flow<List<RecordEntity>>
